@@ -22,6 +22,7 @@ package com.ionspin.kotlin.bignum.integer
  * ugljesa.jovanovic@ionspin.com
  * on 10-Mar-2019
  */
+@ExperimentalUnsignedTypes
 actual object PlatformBigIntegerArithmetic : BigIntegerArithmetic<IntArray, Int> {
     override val ZERO: IntArray
         get() = TODO("not implemented yet")
@@ -72,18 +73,43 @@ actual object PlatformBigIntegerArithmetic : BigIntegerArithmetic<IntArray, Int>
         TODO("not implemented yet")
     }
 
-    override fun pow(operand: IntArray, exponent: Long): IntArray {
+    override fun pow(base: IntArray, exponent: Long): IntArray {
         TODO("not implemented yet")
     }
 
     override fun divide(first: IntArray, second: IntArray): Pair<IntArray, IntArray> {
         TODO("not implemented yet")
     }
+
+    override fun reciprocal(operand: IntArray): Pair<IntArray, IntArray> {
+        TODO("not implemented yet")
+    }
+    
     override fun parseForBase(number: String, base: Int) : IntArray {
         TODO("not implemented yet")
     }
 
     override fun toString(operand: IntArray, base: Int): String {
+        TODO("not implemented yet")
+    }
+
+    override fun numberOfDecimalDigits(operand: IntArray): Long {
+        TODO("not implemented yet")
+    }
+
+    override fun fromULong(uLong: ULong): IntArray {
+        TODO("not implemented yet")
+    }
+
+    override fun fromUInt(uInt: UInt): IntArray {
+        TODO("not implemented yet")
+    }
+
+    override fun fromUShort(uShort: UShort): IntArray {
+        TODO("not implemented yet")
+    }
+
+    override fun fromUByte(uByte: UByte): IntArray {
         TODO("not implemented yet")
     }
 
@@ -107,7 +133,7 @@ actual object PlatformBigIntegerArithmetic : BigIntegerArithmetic<IntArray, Int>
         TODO("not implemented yet")
     }
 
-    override fun inv(operand: IntArray): IntArray {
+    override fun not(operand: IntArray): IntArray {
         TODO("not implemented yet")
     }
 

@@ -35,6 +35,9 @@ val sonatypePassword : String? by project
 
 val sonatypeUsername : String? by project
 
+val sonatypePasswordEnv : String? = System.getenv()["SONATYPE_PASSWORD"]
+val sonatypeUsernameEnv : String? = System.getenv()["SONATYPE_USERNAME"]
+
 repositories {
     mavenCentral()
     jcenter()
@@ -61,16 +64,40 @@ kotlin {
         }
     }
     linuxX64("linux") {
-        compilations["main"].outputKinds("static")
+        binaries {
+            staticLib {
+
+            }
+        }
     }
     iosX64("ios") {
-        compilations["main"].outputKinds("framework")
+        binaries {
+            framework {
+
+            }
+        }
     }
     iosArm64("ios64Arm") {
-        compilations["main"].outputKinds("framework")
+        binaries {
+            framework {
+
+            }
+        }
+    }
+
+    iosArm32("ios32Arm") {
+        binaries {
+            framework {
+
+            }
+        }
     }
     macosX64() {
-        compilations["main"].outputKinds("framework")
+        binaries {
+            framework {
+
+            }
+        }
     }
 
     println(targets.names)
@@ -138,6 +165,13 @@ kotlin {
             dependsOn(nativeMain)
         }
         val ios64ArmTest by getting {
+            dependsOn(nativeTest)
+        }
+
+        val ios32ArmMain by getting {
+            dependsOn(nativeMain)
+        }
+        val ios32ArmTest by getting {
             dependsOn(nativeTest)
         }
 
@@ -271,8 +305,8 @@ publishing {
 
             url = uri(sonatypeStaging)
             credentials {
-                username = sonatypeUsername ?: ""
-                password = sonatypePassword ?: ""
+                username = sonatypeUsername ?: sonatypeUsernameEnv ?: ""
+                password = sonatypePassword ?: sonatypePasswordEnv ?: ""
             }
         }
 
@@ -280,8 +314,8 @@ publishing {
             name = "snapshot"
             url = uri(sonatypeSnapshots)
             credentials {
-                username = sonatypeUsername ?: ""
-                password = sonatypePassword ?: ""
+                username = sonatypeUsername ?: sonatypeUsernameEnv ?: ""
+                password = sonatypePassword ?: sonatypePasswordEnv ?: ""
             }
         }
     }
